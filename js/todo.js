@@ -4,6 +4,7 @@ const todo = () => {
     const post = document.getElementById('post');
     const todoTitle = document.querySelector('.todo__title');
     const list = document.querySelector('.todo__list');
+    const counter = document.querySelector('.todo__count');
 
     const base = {
         init() {
@@ -41,6 +42,9 @@ const todo = () => {
         },
         setTodoLS() {
             localStorage.setItem('todo', JSON.stringify(this.todo))
+        },
+        getCount() {
+            return this.todo.length;
         }
         
     };
@@ -55,10 +59,8 @@ const todo = () => {
         const todoLi = createTodo(objTodo);
 
         list.append(todoLi)
+        counter.innerHTML = base.getCount();
         todoForm.reset();
-
-        const count = document.querySelector('.todo__count');
-        count.innerHTML = base.todo.length;
     };
 
     const createTodo = ({ ready, author, post, id }) => { 
@@ -85,6 +87,7 @@ const todo = () => {
             const todoLi = createTodo(base.todo[i]);
             list.append(todoLi);
         }
+        counter.innerHTML = base.getCount(); 
     };
 
     const checkTodo = event => {
